@@ -1,0 +1,5 @@
+@mixin screen-40 {
+	@media (min-width: 40em) {
+		@content;
+	}
+}

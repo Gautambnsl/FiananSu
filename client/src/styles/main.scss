@@ -1,0 +1,11 @@
+@use "./abstracts" as ab;
+@use "./components";
+
+body {
+	font-family: "Varela Round", sans-serif;
+	color: ab.$text;
+}
+
+.heading-text {
+	color: ab.$heading;
+}

@@ -3,7 +3,7 @@ const ERC20_ETH_ABI = require('../script/BridgeEthUsdc.json');
 const ERC20_FIL_ABI = require('../script/BridgeFilUsdc.json');
 const WETH_FIL_ABI  = require('../script/BridgeFilwEth.json');
 const admin = "0x60f94DBa25380610Dc4cBa80eEE249B6F1007E60"
-const ERC20_ETH_ADDRESS = "0x76d368237D17c50C0869243244278E0d6db5F229"
+const ERC20_ETH_ADDRESS = "0x53af486fA636469F3833102f57eD82CAe26ADfD2"
 const ERC20_FIL_ADDRESS = "0x7D574C8Fc975afCeb6068a93a0B28F70138c92a7"
 const WETH_FIL_ADDRESS =  "0xc9C214a1BA1c266e632C3274B2c2d33422f3963b"
 const pvtkey = "ed8ab54004d7138bca3f8015e012defdf8461a289f866b2b4ad5a0dbd0bd1816"
@@ -29,5 +29,13 @@ const WETH_ETH_CONTRACT = new ethers.Contract(WETH_FIL_ADDRESS,WETH_FIL_ABI,Sign
    console.log("Success 🥳🥳🥳")
   }
 });
+
+ ERC20_ETH_CONTRACT.on("eth", async (from,amount) => {
+   amount = amount.toString();
+   const tx = await WETH_ETH_CONTRACT.mint(from,amount);          
+   console.log("Tx Hash :",tx);
+   await tx.wait()
+   console.log("Success 🥳🥳🥳")
+  });
 
 console.log("Server Started..........✅✅✅✅✅");

@@ -1,0 +1,104 @@
+@use "../abstracts" as ab;
+
+.nav {
+	// width: 90%;
+	padding-inline: clamp(1em, 4vw, 1.5em);
+	padding-block: 1.4em 0.8em;
+	margin-inline: auto;
+
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+
+	box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+		rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+
+	> img {
+		width: clamp(7rem, 33vw, 10rem);
+		cursor: pointer;
+	}
+
+	&-details {
+		margin-left: auto;
+
+		display: flex;
+		gap: 1.2em;
+		align-items: center;
+
+		&__address {
+			outline: 0.15em solid ab.$grey;
+
+			display: flex;
+			gap: 0.3em;
+			align-items: center;
+
+			padding-inline: 1em;
+			padding-block: 0.3em;
+
+			border-radius: 0.6em;
+
+			display: none;
+
+			font-size: 1.1rem;
+			font-weight: 600;
+
+			cursor: context-menu;
+
+			@include ab.screen-40 {
+				display: flex;
+			}
+
+			img {
+				width: 2rem;
+			}
+		}
+
+		button {
+			border: none;
+			background-color: transparent;
+
+			display: inline-flex;
+			gap: 0.5em;
+
+			font-size: clamp(1rem, 4vw, 1.2rem);
+			font-weight: 500;
+
+			padding-block: 0.8em;
+			padding-inline: 1.6em;
+
+			transition: background-color 0.3s ease;
+
+			&:hover,
+			&:focus {
+				cursor: pointer;
+			}
+
+			&.connect {
+				background-color: ab.$dark;
+				color: ab.$background;
+
+				&:hover {
+					background-color: lighten($color: ab.$dark, $amount: 20);
+				}
+
+				&:active {
+					background-color: darken($color: ab.$dark, $amount: 20);
+				}
+			}
+
+			&.disconnect {
+				color: ab.$error;
+
+				outline: 0.2em solid ab.$dark;
+
+				&:hover {
+					background-color: lighten($color: ab.$grey, $amount: 5);
+				}
+
+				&:active {
+					background-color: ab.$grey;
+				}
+			}
+		}
+	}
+}

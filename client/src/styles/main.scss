@@ -2,10 +2,7 @@
 @use "./components";
 
 body {
-	font-family: "Varela Round", sans-serif;
-	color: ab.$text;
-}
-
-.heading-text {
-	color: ab.$heading;
+	font-family: "Poppins", sans-serif;
+	color: ab.$dark;
+	background-color: ab.$background;
 }

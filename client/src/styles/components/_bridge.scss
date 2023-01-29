@@ -1,0 +1,244 @@
+@use "../abstracts" as ab;
+
+.bridge {
+	display: flex;
+	flex-direction: column-reverse;
+	gap: 1.2em;
+
+	padding-block: 3.5em 10em;
+	padding-inline: 0.8em;
+
+	@include ab.screen-40 {
+		flex-direction: row;
+		justify-content: center;
+	}
+
+	> div {
+		border-radius: 0.8em;
+
+		background-color: hsla(12, 88%, 59%, 0.08);
+		backdrop-filter: blur(2em);
+
+		@include ab.screen-40 {
+			// width: 50%;
+		}
+	}
+
+	&-info {
+		padding: 1.6em;
+
+		h2 {
+			color: ab.$heading;
+			font-size: 1.8rem;
+		}
+
+		p {
+			color: ab.$dark;
+			font-weight: 500;
+		}
+
+		img {
+			width: 20rem;
+			margin-inline: auto;
+		}
+	}
+
+	&-deposit {
+		padding-inline: 0.8em;
+		padding-block: 1.2em;
+
+		&__inputs {
+			background-color: whitesmoke;
+
+			padding-inline: 0.6em;
+			padding-block: 1.2em;
+
+			border-radius: 0.8em;
+
+			h3 {
+				font-size: 1.3rem;
+				color: ab.$heading;
+
+				margin-bottom: 0.2em;
+			}
+
+			&-from {
+				&__info {
+					border: 0.15em solid ab.$grey;
+					overflow: hidden;
+
+					border-radius: 0.8em;
+
+					.chain {
+						display: flex;
+						justify-content: space-between;
+
+						background-color: whitesmoke;
+
+						padding-inline: 0.6em;
+
+						border-bottom: 0.15em solid ab.$grey;
+
+						div {
+							display: flex;
+							align-items: center;
+							gap: 0.4em;
+							font-size: 0.9rem;
+						}
+
+						&-name {
+							p {
+								font-weight: 500;
+								font-size: 0.8em;
+							}
+						}
+
+						&-balance {
+							h5 {
+								font-weight: 600;
+								color: ab.$dark;
+							}
+
+							p {
+								font-weight: 500;
+							}
+						}
+					}
+
+					.token {
+						padding-inline: 0.6em;
+						padding-block: 0.7em;
+
+						overflow: hidden;
+
+						display: flex;
+						gap: 0.8em;
+
+						> div {
+							display: flex;
+							gap: 0.3em;
+							align-items: center;
+						}
+
+						&-type {
+							position: relative;
+							width: 30%;
+
+							&::after {
+								content: "";
+								position: absolute;
+								background-color: ab.$grey;
+								width: 0.13rem;
+								height: 10rem;
+
+								right: -0.6em;
+							}
+						}
+
+						&-input {
+							justify-content: space-between;
+							// margin-left: auto;
+
+							width: 70%;
+
+							input {
+								width: 7rem;
+								outline: none;
+								border: none;
+								background: transparent;
+								padding-inline: 0.4em;
+
+								font-size: 1.1rem;
+							}
+
+							button {
+								color: ab.$accent;
+								background-color: transparent;
+
+								border: none;
+								cursor: pointer;
+
+								padding-inline: 0.5em;
+								padding-block: 0.5em;
+
+								font-weight: 500;
+
+								border-radius: 0.4em;
+
+								&:hover {
+									background-color: ab.$grey;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			&-to {
+				margin-top: 2em;
+
+				&__details {
+					background-color: ab.$grey;
+					padding-inline: 0.8em;
+
+					border-radius: 0.8em;
+
+					display: flex;
+					gap: 1em;
+
+					> div {
+						display: flex;
+						gap: 0.4em;
+						align-items: center;
+
+						img {
+							width: 1.5rem;
+						}
+
+						p {
+							font-size: 0.8rem;
+							font-weight: 500;
+						}
+
+						h5 {
+							font-size: 0.8rem;
+						}
+					}
+
+					.balance {
+						margin-left: auto;
+						justify-content: flex-end;
+					}
+				}
+			}
+		}
+
+		&__transfer {
+			margin-top: 1.6em;
+
+			button {
+				width: 100%;
+				padding-block: 0.5em;
+
+				color: white;
+				background-color: ab.$accent;
+				font-size: 1.2rem;
+
+				border: none;
+				border-radius: 0.6em;
+
+				cursor: pointer;
+
+				transition: background-color 0.3s ease;
+
+				&:hover {
+					background-color: lighten(ab.$accent, 10);
+				}
+
+				&:active {
+					background-color: darken(ab.$accent, 10);
+				}
+			}
+		}
+	}
+}

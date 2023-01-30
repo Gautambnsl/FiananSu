@@ -1,20 +1,34 @@
 import Logo from "../assests/logo.png";
 import Disconnect from "../assests/disconnect.svg";
 import Wallet from "../assests/wallet.svg";
-
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { connectWallet } from "@/middleware/connect";
 
 function Nav() {
 	const router = useRouter();
 
 	const [isConnect, setIsConnect] = useState(false);
-	const [userDetails, setUserDetails] = useState(
-		"0x2b5d1C88d09fd2Fd45500b6ADB7870F08A5dECd2"
-	);
+	const [userDetails, setUserDetails] = useState("");
 
-	const handleConnect = () => {
-		setIsConnect((prev) => !prev);
+
+	useEffect(()=>{
+
+		if(window.ethereum.selectedAddress){
+			setIsConnect(true);
+			setUserDetails(window.ethereum.selectedAddress)
+		}
+
+
+	},[])
+
+	const handleConnect = async () => {
+		const {provider} = await connectWallet();
+		if(provider && window.ethereum.selectedAddress){
+			let add = window.ethereum.selectedAddress;
+			setUserDetails(add);
+			setIsConnect(true);
+		}
 	};
 
 	const handleDisconnect = () => {
@@ -34,9 +48,9 @@ function Nav() {
 					<p className="nav-details__address" title={userDetails}>
 						<img src={Wallet.src} />
 
-						{userDetails.substring(0, 4) +
+						{userDetails?.substring(0, 4) +
 							"...." +
-							userDetails.substring(userDetails.length - 4)}
+							userDetails?.substring(userDetails.length - 4)}
 					</p>
 				)}
 

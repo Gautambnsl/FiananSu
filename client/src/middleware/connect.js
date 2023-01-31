@@ -1,5 +1,7 @@
 import { ethers } from "ethers";
 import detectEthereumProvider from "@metamask/detect-provider";
+import { fetchBalance } from "./balances";
+
 
 export async function connectWallet() {
 	try {
@@ -16,6 +18,9 @@ export async function connectWallet() {
 			Provider.on("accountsChanged", (accounts) => window.location.reload());
 			//chain change
 			Provider.on("chainChanged", (_chainId) => window.location.reload());
+
+			fetchBalance();
+
 			return { success: true, provider };
 		} else {
 			return { success: false, msg: "Please install Metamask wallet!" };

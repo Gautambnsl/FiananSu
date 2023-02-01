@@ -3,10 +3,11 @@ import EthereumLogo from "../assests/ethereum.svg";
 import FileCoinLogo from "../assests/Filecoin.svg";
 import USDCLogo from "../assests/USDC.svg";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { fetchBalance } from "@/middleware/balances";
 
 function Bridge() {
-	const [tokenBalance, setTokenBalance] = useState("12.00");
+	const [tokenBalance, setTokenBalance] = useState("0.00");
 	const [tokenBalanceFVM, setTokenBalanceFVM] = useState("0.00");
 	const [tokenInput, setTokenInput] = useState();
 
@@ -19,6 +20,22 @@ function Bridge() {
 	const handleMax = () => {
 		setTokenInput("12");
 	};
+
+
+	useEffect(()=>{
+		async function temp(){
+			if(window.ethereum.selectedAddress){
+				const {ethBalance, filBalance} = await fetchBalance()
+
+				setTokenBalance(ethBalance);
+				setTokenBalanceFVM(filBalance)
+				console.log("working");
+				console.log(ethBalance);
+				console.log(filBalance);
+			}
+		}
+		temp();
+	},[])
 
 	return (
 		<div className="bridge">
@@ -48,7 +65,7 @@ function Bridge() {
 								<div className="chain-balance">
 									<h5>Balance: </h5>
 
-									<p>{tokenBalance} USDC</p>
+									<p>{tokenBalance} ETH</p>
 								</div>
 							</div>
 
@@ -85,7 +102,7 @@ function Bridge() {
 							<div className="balance">
 								<h5>Balance: </h5>
 
-								<p>{tokenBalanceFVM} USDC</p>
+								<p>{tokenBalanceFVM} FIL</p>
 							</div>
 						</div>
 					</div>

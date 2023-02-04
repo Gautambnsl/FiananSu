@@ -2,14 +2,18 @@ import BridgeImg from "../assests/bridge-image.svg";
 import EthereumLogo from "../assests/ethereum.svg";
 import FileCoinLogo from "../assests/Filecoin.svg";
 import USDCLogo from "../assests/USDC.svg";
+import ETHLogo from "../assests/ETH.svg";
 
 import { useEffect, useState } from "react";
 import { fetchBalance } from "@/middleware/balances";
 
 function Bridge() {
-	const [tokenBalance, setTokenBalance] = useState("0.00");
-	const [tokenBalanceFVM, setTokenBalanceFVM] = useState("0.00");
+	const [balance, setBalance] = useState("0.00");
+	const [balanceFVM, setBalanceFVM] = useState("0.00");
 	const [tokenInput, setTokenInput] = useState();
+
+	// 0->ETH, 1->USDC
+	const [token, setToken] = useState(0);
 
 	const handleChange = (e) => {
 		const value = e.target.value;
@@ -21,21 +25,24 @@ function Bridge() {
 		setTokenInput("12");
 	};
 
+	const handleTokenInput = (e) => {
+		setToken(e.target.value);
+	};
 
-	useEffect(()=>{
-		async function temp(){
-			if(window.ethereum.selectedAddress){
-				const {ethBalance, filBalance} = await fetchBalance()
+	useEffect(() => {
+		async function temp() {
+			if (window.ethereum.selectedAddress) {
+				const { ethBalance, filBalance } = await fetchBalance();
 
-				setTokenBalance(ethBalance);
-				setTokenBalanceFVM(filBalance)
+				setBalance(ethBalance);
+				setBalanceFVM(filBalance);
 				console.log("working");
 				console.log(ethBalance);
 				console.log(filBalance);
 			}
 		}
 		temp();
-	},[])
+	}, []);
 
 	return (
 		<div className="bridge">
@@ -65,15 +72,26 @@ function Bridge() {
 								<div className="chain-balance">
 									<h5>Balance: </h5>
 
-									<p>{tokenBalance} ETH</p>
+									<p>
+										{balance} {token == 0 ? "ETH" : "USDC"}
+									</p>
 								</div>
 							</div>
 
 							<div className="token">
 								<div className="token-type">
-									<img src={USDCLogo.src} />
+									<select
+										value={token}
+										onChange={handleTokenInput}
+									>
+										<option value={0}>
+											<p>ETH</p>
+										</option>
 
-									<p>USDC</p>
+										<option value={1}>
+											<p>USDC</p>
+										</option>
+									</select>
 								</div>
 
 								<div className="token-input">
@@ -102,13 +120,16 @@ function Bridge() {
 							<div className="balance">
 								<h5>Balance: </h5>
 
-								<p>{tokenBalanceFVM} FIL</p>
+								<p>
+									{balanceFVM} {token == 0 ? "wETH" : "USDC"}
+								</p>
 							</div>
 						</div>
 					</div>
 				</div>
 
 				<div className="bridge-deposit__transfer">
+					{token == 1 && <button>Approve</button>}
 					<button>Transfer</button>
 				</div>
 			</div>

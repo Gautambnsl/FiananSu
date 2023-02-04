@@ -215,6 +215,8 @@
 
 		&__transfer {
 			margin-top: 1.6em;
+			display: grid;
+			gap: 1em;
 
 			button {
 				width: 100%;

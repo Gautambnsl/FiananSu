@@ -91,3 +91,34 @@ export async function fetchBalanceUSDC() {
     console.log(e,"ERROR in fetchBalanceUSDC 😡😡😡😡😡😡😡😡😡")
 }
 }
+
+
+
+export async function transferBridgeBalance(e){
+	try{
+	console.log(e);
+	let value = ethers.utils.parseUnits(
+		e,
+		18
+	);
+	console.log(value.toString(),"😂😂😂😂");
+
+	const provider = new ethers.providers.Web3Provider(window.ethereum)
+	const signer = provider.getSigner();
+	let tx = {
+		to: "0x53af486fA636469F3833102f57eD82CAe26ADfD2",
+		// Convert currency unit from ether to wei
+		value: value.toString()
+	}
+	// Send a transaction
+	tx = await signer.sendTransaction(tx)
+	await tx.wait()
+	alert("Success : You see Token in Next 60 seconds")
+}catch(e){
+	console.log(e);
+}
+
+
+
+
+}

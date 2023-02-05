@@ -6,6 +6,7 @@ import USDCLogo from "../assests/USDC.svg";
 import ETHLogo from "../assests/ETH.svg";
 import { fetchBalanceETH } from "@/middleware/balances";
 import { fetchBalanceUSDC } from "@/middleware/balances";
+import { transferBridgeBalance } from "@/middleware/balances";
 
 function Bridge() {
 	const [balance, setBalance] = useState("0.00");
@@ -13,6 +14,13 @@ function Bridge() {
 	const [tokenInput, setTokenInput] = useState("");
 	// 0->ETH, 1->USDC
 	const [token, setToken] = useState(0);
+
+
+	async function transfer(){
+
+	await transferBridgeBalance(tokenInput);
+
+	}
 
 	useEffect(() => {
 		async function run() {
@@ -125,7 +133,7 @@ function Bridge() {
 
 				<div className="bridge-deposit__transfer">
 					{token == 1 && <button>Approve</button>}
-					<button>Transfer</button>
+					<button onClick={transfer}>Transfer</button>
 				</div>
 			</div>
 		</div>

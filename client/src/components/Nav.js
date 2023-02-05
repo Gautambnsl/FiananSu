@@ -12,7 +12,7 @@ function Nav() {
 	const [userDetails, setUserDetails] = useState("");
 
 	useEffect(() => {
-		if (window.ethereum.selectedAddress) {
+		if (window?.ethereum?.selectedAddress) {
 			setIsConnect(true);
 			setUserDetails(window.ethereum.selectedAddress);
 		}

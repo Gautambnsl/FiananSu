@@ -15,20 +15,19 @@ function Bridge() {
 	const [token, setToken] = useState(0);
 
 	useEffect(() => {
-		async function run() {
-			if (token == 0) {
-				const { ETHBalance, wETHBalance } = await fetchBalanceETH();
-				setBalance(ETHBalance);
-				setBalanceFVM(wETHBalance);
-			} else {
-				const { ETHUSDCBalance, FILUSDCBalance } =
-					await fetchBalanceUSDC();
-				setBalance(ETHUSDCBalance);
-				setBalanceFVM(FILUSDCBalance);
-			}
-		}
-
-		run();
+		// async function run() {
+		// 	if (token == 0) {
+		// 		const { ETHBalance, wETHBalance } = await fetchBalanceETH();
+		// 		setBalance(ETHBalance);
+		// 		setBalanceFVM(wETHBalance);
+		// 	} else {
+		// 		const { ETHUSDCBalance, FILUSDCBalance } =
+		// 			await fetchBalanceUSDC();
+		// 		setBalance(ETHUSDCBalance);
+		// 		setBalanceFVM(FILUSDCBalance);
+		// 	}
+		// }
+		// run();
 	}, [token]);
 
 	const handleChange = (e) => {

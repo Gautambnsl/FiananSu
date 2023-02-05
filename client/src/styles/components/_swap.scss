@@ -1,0 +1,144 @@
+@use "../abstracts" as ab;
+
+.swap {
+	width: min(90%, 30rem);
+
+	margin-inline: auto;
+	margin-block: 6em 12em;
+
+	padding-inline: clamp(1em, 5vw, 2em);
+	padding-block: 1.2em;
+
+	border-radius: 0.6em;
+	background-color: #ffffff57;
+	backdrop-filter: blur(0.2em);
+
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+		rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+		rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+
+	> h3 {
+		font-size: 1.5rem;
+		color: ab.$heading;
+		line-height: 1.2em;
+	}
+
+	&-options {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+
+		margin-block: 1.5em;
+
+		.interchange-button {
+			display: flex;
+			justify-content: center;
+
+			button {
+				aspect-ratio: 1/1;
+				width: 2em;
+				border-radius: 50%;
+				font-weight: 600;
+				font-size: 1.5rem;
+
+				cursor: pointer;
+				border: none;
+				outline: none;
+
+				box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+					rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+			}
+		}
+
+		&__token {
+			border-radius: 0.6em;
+			background-color: #fff;
+
+			box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+
+			.token-input {
+				border-bottom: 0.15em solid ab.$grey;
+				padding-inline: 0.7em;
+				padding-block: 0.8em 0.6em;
+
+				display: flex;
+				justify-content: space-between;
+				gap: 1em;
+
+				align-items: center;
+
+				&__name {
+					display: flex;
+					align-items: center;
+					gap: 0.3em;
+
+					padding-inline: 0.6em;
+					padding-block: 0.5em;
+
+					border-radius: 0.6em;
+					background-color: lighten(ab.$grey, 5);
+
+					font-weight: 600;
+					color: ab.$dark;
+
+					img {
+						width: 1.4rem;
+					}
+				}
+
+				input {
+					width: 70%;
+
+					outline: none;
+					border: none;
+				}
+			}
+
+			.token-details {
+				padding-inline: 0.7em;
+				padding-block: 0.4em;
+
+				p {
+					color: darken(ab.$grey, 25);
+					font-size: 0.9rem;
+					font-weight: 500;
+
+					span {
+						color: ab.$dark;
+						font-weight: 600;
+					}
+				}
+			}
+		}
+	}
+
+	&-buttons {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+
+		button {
+			width: 100%;
+			padding-block: 0.3em;
+
+			color: white;
+			background-color: ab.$accent;
+			font-size: 1.2rem;
+
+			border: none;
+			border-radius: 0.6em;
+
+			cursor: pointer;
+
+			transition: background-color 0.3s ease;
+
+			&:hover {
+				background-color: lighten(ab.$accent, 10);
+			}
+
+			&:active {
+				background-color: darken(ab.$accent, 10);
+			}
+		}
+	}
+}

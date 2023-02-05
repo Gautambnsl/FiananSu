@@ -11,20 +11,16 @@ function Nav() {
 	const [isConnect, setIsConnect] = useState(false);
 	const [userDetails, setUserDetails] = useState("");
 
-
-	useEffect(()=>{
-
-		if(window.ethereum.selectedAddress){
+	useEffect(() => {
+		if (window.ethereum.selectedAddress) {
 			setIsConnect(true);
-			setUserDetails(window.ethereum.selectedAddress)
+			setUserDetails(window.ethereum.selectedAddress);
 		}
-
-
-	},[])
+	}, []);
 
 	const handleConnect = async () => {
-		const {provider} = await connectWallet();
-		if(provider && window.ethereum.selectedAddress){
+		const { provider } = await connectWallet();
+		if (provider && window.ethereum.selectedAddress) {
 			let add = window.ethereum.selectedAddress;
 			setUserDetails(add);
 			setIsConnect(true);

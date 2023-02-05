@@ -8,28 +8,28 @@ import { fetchBalanceETH } from "@/middleware/balances";
 import { fetchBalanceUSDC } from "@/middleware/balances";
 
 function Bridge() {
-
 	const [balance, setBalance] = useState("0.00");
 	const [balanceFVM, setBalanceFVM] = useState("0.00");
-	const [tokenInput, setTokenInput] = useState();
+	const [tokenInput, setTokenInput] = useState("");
 	// 0->ETH, 1->USDC
 	const [token, setToken] = useState(0);
 
-
-	useEffect(()=>{
-		async function run(){
-			if(token == 0){
-			const {ETHBalance, wETHBalance} = await fetchBalanceETH();
-			setBalance(ETHBalance);
-			setBalanceFVM(wETHBalance);
-			}else{
-			const {ETHUSDCBalance, FILUSDCBalance} = await fetchBalanceUSDC();
-			setBalance(ETHUSDCBalance);
-			setBalanceFVM(FILUSDCBalance);
+	useEffect(() => {
+		async function run() {
+			if (token == 0) {
+				const { ETHBalance, wETHBalance } = await fetchBalanceETH();
+				setBalance(ETHBalance);
+				setBalanceFVM(wETHBalance);
+			} else {
+				const { ETHUSDCBalance, FILUSDCBalance } =
+					await fetchBalanceUSDC();
+				setBalance(ETHUSDCBalance);
+				setBalanceFVM(FILUSDCBalance);
 			}
 		}
-		run()
-	},[token])
+
+		run();
+	}, [token]);
 
 	const handleChange = (e) => {
 		const value = e.target.value;
@@ -43,7 +43,6 @@ function Bridge() {
 	const handleTokenInput = (e) => {
 		setToken(e.target.value);
 	};
-
 
 	return (
 		<div className="bridge">
@@ -85,13 +84,9 @@ function Bridge() {
 										value={token}
 										onChange={handleTokenInput}
 									>
-										<option value={0}>
-											<p>ETH</p>
-										</option>
+										<option value={0}>ETH</option>
 
-										<option value={1}>
-											<p>USDC</p>
-										</option>
+										<option value={1}>USDC</option>
 									</select>
 								</div>
 

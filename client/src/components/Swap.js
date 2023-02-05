@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { fetchBalanceETH } from "@/middleware/balances";
+import { useState,useEffect } from "react";
+
 
 import ETHLogo from "../assests/ETH.svg";
 import FileCoinLogo from "../assests/Filecoin.svg";
@@ -8,12 +10,24 @@ function Swap() {
 	const [ethBalance, setEthBalance] = useState("0.00");
 	const [filecoinBalance, setFilecoinBalance] = useState("1.00");
 
+
+	useEffect(() => {
+		async function run() {
+			const {wETHBalance, FILBalance} = await fetchBalanceETH();
+			setEthBalance(wETHBalance)
+			setFilecoinBalance(FILBalance)
+		}
+		run();
+	}, []);
+
+
+
 	const [tokenInput, setTokenInput] = useState({
 		eth: "",
 		filecoin: "",
 	});
 
-	const [tokenSwapValue, setTokenSwapValue] = useState("0");
+	const [tokenSwapValue, setTokenSwapValue] = useState("1");
 
 	const handleTokenSwap = () => {
 		setFcToEth((prev) => !prev);
@@ -76,7 +90,7 @@ function Swap() {
 								{fcToEth ? (
 									<>{filecoinBalance} FIL</>
 								) : (
-									<>{ethBalance} ETH</>
+									<>{ethBalance} wETH</>
 								)}
 							</span>
 						</p>

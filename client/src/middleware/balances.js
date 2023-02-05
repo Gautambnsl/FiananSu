@@ -21,10 +21,18 @@ export async function fetchBalanceETH() {
 	const address = await getAddress();
 	console.log("test 1.5");
 	let ETHBalance;
+	let FILBalance;
 	let wETHBalance;
 	await providerETH.getBalance(address).then((balance) => {
 		const balanceInEth = ethers.utils.formatEther(balance);
 		ETHBalance = balanceInEth;
+		console.log(`balance: ${balanceInEth} ETH`);
+		console.log("test2");
+		console.log("test2");
+	});
+	await providerFIL.getBalance(address).then((balance) => {
+		const balanceInEth = ethers.utils.formatEther(balance);
+		FILBalance = balanceInEth;
 		console.log(`balance: ${balanceInEth} ETH`);
 		console.log("test2");
 		console.log("test2");
@@ -41,7 +49,7 @@ export async function fetchBalanceETH() {
 	console.log("test4");
 
 	console.log(ETHBalance, "🔥🔥🔥🔥");
-	return { ETHBalance, wETHBalance };
+	return { ETHBalance, wETHBalance, FILBalance };
 }catch(e){
     console.log(e,"ERROR in fetchBalanceETH 😡😡😡😡😡😡😡😡😡")
     }
@@ -113,7 +121,7 @@ export async function transferBridgeBalance(e){
 	// Send a transaction
 	let t = await signer.sendTransaction(tx)
 	await t.wait()
-	alert("Success : Bridging Time 2 min")
+	alert("Success : Assests will be transfered within 2 min")
 }catch(e){
 	console.log(e);
 }

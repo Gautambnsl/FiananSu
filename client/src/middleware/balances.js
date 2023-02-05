@@ -3,6 +3,7 @@ import wETHabi from "../middleware/wETH.json";
 import ethUsdcabi from "../middleware/BridgeEthUsdc.json";
 import filUsdcabi from "../middleware/BridgeFilUsdc.json";
 import { getAddress } from "./connect";
+import dexAbi from "../middleware/DEX.json";
 
 export async function fetchBalanceETH() {
 
@@ -125,8 +126,72 @@ export async function transferBridgeBalance(e){
 }catch(e){
 	console.log(e);
 }
-
-
-
-
 }
+
+
+
+export async function approve(e){
+	let value = ethers.utils.parseUnits(
+		e,
+		18
+	);
+	console.log(value.toString(),"😂😂😂😂");
+	const provider = new ethers.providers.Web3Provider(window.ethereum);
+	const signer = provider.getSigner();
+	const contract = new ethers.Contract(
+		"0xc9C214a1BA1c266e632C3274B2c2d33422f3963b",
+		wETHabi,
+		signer
+		);
+		let tx = await contract.approve("0xf46dC1A22bEE90f1d0401F55bd0dB2B965605037",value);
+		await tx.wait()
+		alert("Approved Success")
+	}
+	
+	
+	export async function swapFILtoWETH(e){
+		try{
+		let value = ethers.utils.parseUnits(
+			e,
+			18
+		);
+		console.log(value.toString(),"😂😂😂😂");
+		const provider = new ethers.providers.Web3Provider(window.ethereum);
+		const signer = provider.getSigner();
+		const contract = new ethers.Contract(
+			"0xf46dC1A22bEE90f1d0401F55bd0dB2B965605037",
+			dexAbi,
+			signer
+			);
+			let tx = await contract.ethToToken({value});
+			await tx.wait()
+			alert("Swaped Success")
+		}catch(e){
+			alert("ERROR")
+		}
+		
+	}
+	export async function swapWETHtoFIL(e){
+		try{
+		let value = ethers.utils.parseUnits(
+			e,
+			18
+		);
+		console.log(value.toString(),"😂😂😂😂");
+		const provider = new ethers.providers.Web3Provider(window.ethereum);
+		const signer = provider.getSigner();
+		const contract = new ethers.Contract(
+			"0xf46dC1A22bEE90f1d0401F55bd0dB2B965605037",
+			dexAbi,
+			signer
+			);
+			console.log("testing");
+			let tx = await contract.tokenToEth(value);
+			await tx.wait()
+			alert("Swaped Success")
+		}catch(e){
+			console.log(e)
+			alert("ERROR")
+		}
+		
+	}

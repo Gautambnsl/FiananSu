@@ -1,16 +1,21 @@
-import { fetchBalanceETH } from "@/middleware/balances";
+import { approve, fetchBalanceETH, swapFILtoWETH, swapWETHtoFIL } from "@/middleware/balances";
 import { useState,useEffect } from "react";
 
 
 import ETHLogo from "../assests/ETH.svg";
 import FileCoinLogo from "../assests/Filecoin.svg";
 
+
 function Swap() {
 	const [fcToEth, setFcToEth] = useState(false);
 	const [ethBalance, setEthBalance] = useState("0.00");
-	const [filecoinBalance, setFilecoinBalance] = useState("1.00");
-
-
+	const [filecoinBalance, setFilecoinBalance] = useState("0.00");
+	const [tokenInput, setTokenInput] = useState({
+		eth: "",
+		filecoin: "",
+	});
+	
+	
 	useEffect(() => {
 		async function run() {
 			const {wETHBalance, FILBalance} = await fetchBalanceETH();
@@ -20,14 +25,23 @@ function Swap() {
 		run();
 	}, []);
 
+	function swapkro(){
+
+		if(fcToEth){
+		swapFILtoWETH(tokenInput.filecoin)
+		}else{
+		swapWETHtoFIL(tokenInput.eth)
+		}
+		
+	}
 
 
-	const [tokenInput, setTokenInput] = useState({
-		eth: "",
-		filecoin: "",
-	});
+	function approvekro(){
+		approve(tokenInput.eth);
+	}
 
-	const [tokenSwapValue, setTokenSwapValue] = useState("1");
+
+	const [tokenSwapValue, setTokenSwapValue] = useState("");
 
 	const handleTokenSwap = () => {
 		setFcToEth((prev) => !prev);
@@ -125,7 +139,7 @@ function Swap() {
 								{!fcToEth ? (
 									<>{filecoinBalance} FIL</>
 								) : (
-									<>{ethBalance} ETH</>
+									<>{ethBalance} wETH</>
 								)}
 							</span>
 						</p>
@@ -134,9 +148,9 @@ function Swap() {
 			</div>
 
 			<div className="swap-buttons">
-				{!fcToEth && <button>Approve</button>}
+				{!fcToEth && <button onClick={approvekro}>Approve</button>}
 
-				<button>Swap</button>
+				<button onClick={swapkro}>Swap</button>
 			</div>
 		</div>
 	);

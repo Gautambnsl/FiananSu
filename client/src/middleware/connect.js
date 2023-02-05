@@ -1,6 +1,5 @@
 import { ethers } from "ethers";
 import detectEthereumProvider from "@metamask/detect-provider";
-import { fetchBalance } from "./balances";
 
 
 export async function connectWallet() {
@@ -9,6 +8,7 @@ export async function connectWallet() {
 		if (Provider) {
 			const provider = new ethers.providers.Web3Provider(Provider, "any");
 			await provider.send("eth_requestAccounts", []);
+			// console.log("ddd")
 			const signer = provider.getSigner();
             //connect
 			Provider.on("connect", (ConnectInfo) => window.location.reload());
@@ -19,7 +19,6 @@ export async function connectWallet() {
 			//chain change
 			Provider.on("chainChanged", (_chainId) => window.location.reload());
 
-			fetchBalance();
 
 			return { success: true, provider };
 		} else {

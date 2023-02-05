@@ -19,8 +19,8 @@ function Nav() {
 	}, []);
 
 	const handleConnect = async () => {
-		const { provider } = await connectWallet();
-		if (provider && window.ethereum.selectedAddress) {
+		const { success } = await connectWallet();
+		if (success) {
 			let add = window.ethereum.selectedAddress;
 			setUserDetails(add);
 			setIsConnect(true);

@@ -111,8 +111,8 @@ export async function transferBridgeBalance(e){
 		value: value.toString()
 	}
 	// Send a transaction
-	tx = await signer.sendTransaction(tx)
-	await tx.wait()
+	let t = await signer.sendTransaction(tx)
+	await t.wait()
 	alert("Success : You see Token in Next 60 seconds")
 }catch(e){
 	console.log(e);

@@ -113,7 +113,7 @@ export async function transferBridgeBalance(e){
 	// Send a transaction
 	let t = await signer.sendTransaction(tx)
 	await t.wait()
-	alert("Success : You see Token in Next 60 seconds")
+	alert("Success : Bridging Time 2 min")
 }catch(e){
 	console.log(e);
 }

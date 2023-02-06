@@ -16,6 +16,7 @@ const nextConfig = {
 		path: '',
 	  },
 	  trailingSlash: true,
+	  distDir: 'build',
 };
 
 module.exports = nextConfig;

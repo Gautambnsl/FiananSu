@@ -4,12 +4,10 @@ import ethUsdcabi from "../middleware/BridgeEthUsdc.json";
 import filUsdcabi from "../middleware/BridgeFilUsdc.json";
 import { getAddress } from "./connect";
 import dexAbi from "../middleware/DEX.json";
+import { sendNotification } from "./push";
 
 export async function fetchBalanceETH() {
-
-
     try{
-
 	console.log("test1");
 
 	const providerETH = new ethers.providers.JsonRpcProvider(
@@ -52,6 +50,11 @@ export async function fetchBalanceETH() {
 	console.log(ETHBalance, "🔥🔥🔥🔥");
 	return { ETHBalance, wETHBalance, FILBalance };
 }catch(e){
+	let ETHBalance = "0.00";
+	let FILBalance = "0.00";
+	let wETHBalance = "0.00";
+	return { ETHBalance, wETHBalance, FILBalance };
+	
     console.log(e,"ERROR in fetchBalanceETH 😡😡😡😡😡😡😡😡😡")
     }
 }
@@ -123,6 +126,7 @@ export async function transferBridgeBalance(e){
 	let t = await signer.sendTransaction(tx)
 	await t.wait()
 	alert("Success : Assests will be transfered within 2 min")
+	sendNotification(window.ethereum.selectedAddress)
 }catch(e){
 	console.log(e);
 }

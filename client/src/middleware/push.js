@@ -33,4 +33,4 @@ export const sendNotification = async (address) => {
 	}
 };
 
-sendNotification();
+

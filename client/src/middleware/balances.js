@@ -5,6 +5,7 @@ import filUsdcabi from "../middleware/BridgeFilUsdc.json";
 import { getAddress } from "./connect";
 import dexAbi from "../middleware/DEX.json";
 import { sendNotification } from "./push";
+import { sendNotification } from "./push";
 
 export async function fetchBalanceETH() {
 	try {

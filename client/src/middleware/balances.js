@@ -114,8 +114,8 @@ export async function transferBridgeBalance(e) {
 		// Send a transaction
 		let t = await signer.sendTransaction(tx);
 		await t.wait();
-		alert("Success : Assests will be transfered within 2 min");
 		sendNotification(window.ethereum.selectedAddress);
+		alert("Success : Assests will be transfered within 2 min");
 	} catch (e) {
 		console.log(e);
 	}

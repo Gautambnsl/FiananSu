@@ -3,7 +3,7 @@ import Bridge from "@/components/Bridge";
 
 function Home() {
 	return (
-		<Gradient isBridge={true}>
+		<Gradient isBridge={true} isBorrow={false} isSwap={false}>
 			<Bridge />
 		</Gradient>
 	);

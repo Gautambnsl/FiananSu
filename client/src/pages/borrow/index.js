@@ -1,10 +1,10 @@
 import Gradient from "@/components/Gradient";
-import Swap from "@/components/Swap";
+import Borrow from "@/components/Borrow";
 
 function Home() {
 	return (
-		<Gradient isBridge={false} isBorrow={false} isSwap={true} >
-			<Swap />
+		<Gradient isBridge={false} isBorrow={true} isSwap={false}>
+			<Borrow />
 		</Gradient>
 	);
 }

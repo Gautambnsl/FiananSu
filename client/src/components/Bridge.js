@@ -15,11 +15,8 @@ function Bridge() {
 	// 0->ETH, 1->USDC
 	const [token, setToken] = useState(0);
 
-
-	async function transfer(){
-
-	await transferBridgeBalance(tokenInput);
-
+	async function transfer() {
+		await transferBridgeBalance(tokenInput);
 	}
 
 	useEffect(() => {
@@ -29,8 +26,7 @@ function Bridge() {
 				setBalance(ETHBalance);
 				setBalanceFVM(wETHBalance);
 			} else {
-				const { ETHUSDCBalance, FILUSDCBalance } =
-					await fetchBalanceUSDC();
+				const { ETHUSDCBalance, FILUSDCBalance } = await fetchBalanceUSDC();
 				setBalance(ETHUSDCBalance);
 				setBalanceFVM(FILUSDCBalance);
 			}
@@ -87,14 +83,16 @@ function Bridge() {
 
 							<div className="token">
 								<div className="token-type">
-									<select
+									{/* <select
 										value={token}
 										onChange={handleTokenInput}
 									>
 										<option value={0}>ETH</option>
 
 										<option value={1}>USDC</option>
-									</select>
+									</select> */}
+									<img src={EthereumLogo.src} alt="" />
+									Amount
 								</div>
 
 								<div className="token-input">
@@ -123,7 +121,20 @@ function Bridge() {
 							<div className="balance">
 								<h5>Balance: </h5>
 
-								<p>
+								<p
+									style={{
+										display: "flex",
+										alignItems: "center",
+										gap: "5px",
+									}}
+								>
+									<img
+										src={ETHLogo.src}
+										alt=""
+										style={{
+											width: "17px",
+										}}
+									/>
 									{balanceFVM} {token == 0 ? "wETH" : "USDC"}
 								</p>
 							</div>

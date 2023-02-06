@@ -89,7 +89,7 @@
 			&.disconnect {
 				color: ab.$error;
 
-				outline: 0.2em solid ab.$dark;
+				// outline: 0.2em solid ab.$dark;
 
 				&:hover {
 					background-color: lighten($color: ab.$grey, $amount: 5);

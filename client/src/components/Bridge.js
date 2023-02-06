@@ -53,7 +53,7 @@ function Bridge() {
 				<h2>FileCoin Bridge</h2>
 
 				<div>
-					<p>Here's a bridge for you to use.</p>
+					<p>Here&aposs a bridge for you to use.</p>
 
 					<img src={BridgeImg.src} />
 				</div>

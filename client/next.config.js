@@ -11,12 +11,6 @@ const nextConfig = {
 			},
 		];
 	},
-	images: {
-		loader: 'akamai',
-		path: '',
-	  },
-	  trailingSlash: true,
-	  distDir: 'build',
 };
 
 module.exports = nextConfig;
